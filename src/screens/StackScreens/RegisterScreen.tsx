@@ -9,6 +9,13 @@ type Screens = {
 }
 
 export default function RegisterScreen() {
+  let [userData,setUserData] = useState({
+    firstName:"",
+    lastName:"",
+    email:"",
+    password:"",
+  });
+  let [ConfirmPassword,setConfirmPassword] = useState("");
   let navigator = useNavigation<NavigationProp<Screens>>();
   let [password,setPassword] = useState({
     passwordVisibility:true,
@@ -28,6 +35,12 @@ export default function RegisterScreen() {
       }));
     }
   }
+  let updateUserData = (fieldName:string,fieldValue:string) => {
+    setUserData((prev)=>({
+      ...prev,
+      [fieldName]:fieldValue,
+    }))
+  }
   return (
     <View style={styles.mainView}>
       <View style={styles.registerView}>
@@ -40,26 +53,26 @@ export default function RegisterScreen() {
           <Text style={styles.defaultFontSize}>
             First Name
           </Text>
-          <TextInput style={styles.defaultTextInput}></TextInput>
+          <TextInput style={styles.defaultTextInput} onChangeText={(text)=>updateUserData("firstName",text)}></TextInput>
           <Text style={styles.defaultFontSize}>
             Last Name
           </Text>
-          <TextInput style={styles.defaultTextInput}></TextInput>
+          <TextInput style={styles.defaultTextInput} onChangeText={(text)=>updateUserData("lastName",text)}></TextInput>
           <Text style={styles.defaultFontSize}>
             Email
           </Text>
-          <TextInput style={styles.defaultTextInput}></TextInput>
-          <Text style={styles.defaultFontSize}>
+          <TextInput style={styles.defaultTextInput} onChangeText={(text)=>updateUserData("email",text)}></TextInput>
+          <Text style={styles.defaultFontSize}> 
             Password
           </Text>
           <View style={{flexDirection:"row"}}>
-            <TextInput style={[styles.defaultTextInput,{width:"100%"}]} secureTextEntry={true}></TextInput>
+            <TextInput style={[styles.defaultTextInput,{width:"100%"}]} onChangeText={(text)=>updateUserData("password",text)} secureTextEntry={true}></TextInput>
           </View>
           <Text style={styles.defaultFontSize}>
             Confirm Password
           </Text>
           <View style={{flexDirection:"row"}}>
-            <TextInput style={[styles.defaultTextInput,{width:"90%"}]} secureTextEntry={password.passwordVisibility}></TextInput>
+            <TextInput style={[styles.defaultTextInput,{width:"90%"}]} onChangeText={(text)=>setConfirmPassword(text)} secureTextEntry={password.passwordVisibility}></TextInput>
             <TouchableOpacity onPress={updatePasswordVisibility}>
               <Icon name={password.passwordIcon} color={"black"} size={30}/>
             </TouchableOpacity>

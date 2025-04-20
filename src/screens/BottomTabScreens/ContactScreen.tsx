@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const openLinkedInProfile = (username:string) => {
     const appURL = `linkedin://in/${username}`;
     const webURL = `https://www.linkedin.com/in/${username}`;
-  
     Linking.canOpenURL(appURL).then((supported) => {
         if (supported) {
           return Linking.openURL(appURL);
@@ -17,6 +16,7 @@ const openLinkedInProfile = (username:string) => {
 
     ));
 };
+
 export default function ContactScreen() {
   return (
     <View style={styles.container}>

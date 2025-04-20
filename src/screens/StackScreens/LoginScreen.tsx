@@ -1,12 +1,16 @@
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, NativeSyntheticEvent, TextInputKeyPressEventData } from 'react-native';
 import { TouchableOpacity, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 type screens = {
     bottomTab: undefined
 }
 export default function LoginScreen() {
+    let [userData,setUserData] = useState({
+        email:"",
+        password:"",
+    });
     let [password,setPassword] = useState({
         passwordVisibility:true,
         passwordIcon:"eye-off"
@@ -25,6 +29,12 @@ export default function LoginScreen() {
             }));
         }
     }
+    let updateUserData = (fieldName:string,fieldText:string) => {
+        setUserData((prev)=>({
+            ...prev,
+            [fieldName]:fieldText,
+        }));
+    }
     const navigator = useNavigation<NavigationProp<screens>>();
     return (
         <View style={styles.mainView}>
@@ -38,12 +48,12 @@ export default function LoginScreen() {
                     <Text style={styles.defaultFontSize}>
                         Email
                     </Text>
-                    <TextInput style={styles.defaultTextInput}></TextInput>
+                    <TextInput style={styles.defaultTextInput} onChangeText={(text)=>updateUserData("email",text)}></TextInput>
                     <Text style={styles.defaultFontSize}>
                         Password
                     </Text>
                     <View style={{flexDirection:"row"}}>
-                        <TextInput style={[styles.defaultTextInput,{width:"90%"}]} secureTextEntry={password.passwordVisibility}></TextInput>
+                        <TextInput style={[styles.defaultTextInput,{width:"90%"}]} onChangeText={(text)=>updateUserData("password",text)} secureTextEntry={password.passwordVisibility}></TextInput>
                         <TouchableOpacity onPress={updatePasswordVisibility}>
                             <Icon name={password.passwordIcon} color={"black"} size={30}/>
                         </TouchableOpacity>

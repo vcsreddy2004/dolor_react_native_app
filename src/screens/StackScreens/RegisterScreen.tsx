@@ -1,26 +1,33 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import Icon from 'react-native-vector-icons/Ionicons';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+
+type Screens = {
+  bottomTab:undefined,
+  login:undefined,
+}
 
 export default function RegisterScreen() {
-    let [password,setPassword] = useState({
-        passwordVisibility:true,
-        passwordIcon:"eye-off"
-    });
-    let updatePasswordVisibility = () => {
-        if(password.passwordVisibility) {
-            setPassword(()=>({
-                passwordVisibility:false,
-                passwordIcon:"eye",
-            }));
-        }
-        else {
-            setPassword(()=>({
-                passwordVisibility:true,
-                passwordIcon:"eye",
-            }));
-        }
+  let navigator = useNavigation<NavigationProp<Screens>>();
+  let [password,setPassword] = useState({
+    passwordVisibility:true,
+    passwordIcon:"eye-off"
+  });
+  let updatePasswordVisibility = () => {
+    if(password.passwordVisibility) {
+      setPassword(()=>({
+        passwordVisibility:false,
+        passwordIcon:"eye",
+      }));
     }
+    else {
+      setPassword(()=>({
+        passwordVisibility:true,
+        passwordIcon:"eye",
+      }));
+    }
+  }
   return (
     <View style={styles.mainView}>
       <View style={styles.registerView}>
@@ -57,6 +64,11 @@ export default function RegisterScreen() {
               <Icon name={password.passwordIcon} color={"black"} size={30}/>
             </TouchableOpacity>
           </View>
+          <View style={{flexDirection:"row",justifyContent:"center"}}>
+            <TouchableOpacity onPress={()=>navigator.navigate("login")} style={styles.registerBtn}>
+              <Text style={{textAlign:"center",color:"white"}}>Register</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -71,7 +83,7 @@ const styles = StyleSheet.create({
     },
     registerBtn: {
         backgroundColor:"green",
-        width:300,
+        width:100,
         padding:10,
         margin:10,
     },

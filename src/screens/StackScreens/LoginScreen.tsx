@@ -48,6 +48,11 @@ export default function LoginScreen() {
                             <Icon name={password.passwordIcon} color={"black"} size={30}/>
                         </TouchableOpacity>
                     </View>
+                    <View style={{flexDirection:"row",justifyContent:"center"}}>
+                        <TouchableOpacity onPress={()=>navigator.navigate("bottomTab")} style={styles.loginBtn}>
+                            <Text style={{textAlign:"center",color:"white"}}>Log In</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         </View>
@@ -62,14 +67,15 @@ const styles = StyleSheet.create({
     },
     loginBtn: {
         backgroundColor:"green",
-        width:300,
+        width:100,
         padding:10,
-        margin:10,
+        margin:30,
     },
     loginView: {
         width:"70%",
         height:400,
         backgroundColor:"white",
+        margin:"auto",
     },
     loginHeader: {
         backgroundColor:"rgb(205, 133, 0)",

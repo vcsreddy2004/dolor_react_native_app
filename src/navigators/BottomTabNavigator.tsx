@@ -1,37 +1,31 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import HomeScreen from '../screens/BottomTabScreens/HomeScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
-import SearchScreen from '../screens/BottomTabScreens/SearchScreen';
+import Icon2 from 'react-native-vector-icons/FontAwesome';
+import DrawerNavigator from './DrawerNavigator'
+import ContactScreen from '../screens/BottomTabScreens/ContactScreen';
 export default function BottomTabNavigator() {
     const Tab = createBottomTabNavigator();
     return (
         <Tab.Navigator>
             <Tab.Screen 
-                name="Home" 
-                component={HomeScreen} 
+                name="home" 
+                component={DrawerNavigator} 
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Icon name="home" color={"blue"} size={30} />
                     ),
+                    headerShown: false,
                 }} 
             />
             <Tab.Screen 
-                name="search" 
-                component={SearchScreen} 
+                name="contact" 
+                component={ContactScreen} 
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Icon name="search" color={"blue"} size={30} />
+                        <Icon2 name="phone" color={"blue"} size={30} />
                     ),
-                }} 
-            />
-            <Tab.Screen 
-                name="menu" 
-                component={SearchScreen} 
-                options={{
-                    tabBarIcon: ({ color, size }) => (
-                        <Icon name="menu" color={"blue"} size={30} />
-                    ),
+                    headerShown: false,
                 }} 
             />
         </Tab.Navigator>    

@@ -1,12 +1,15 @@
 import { useNavigation, NavigationProp } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet, NativeSyntheticEvent, TextInputKeyPressEventData } from 'react-native';
 import { TouchableOpacity, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { AuthContext } from '../../auth/AuthProvider';
 type screens = {
     bottomTab: undefined
 }
 export default function LoginScreen() {
+    const navigator = useNavigation<NavigationProp<screens>>();
+    let {login,user} = useContext(AuthContext);
     let [userData,setUserData] = useState({
         email:"",
         password:"",
@@ -35,7 +38,12 @@ export default function LoginScreen() {
             [fieldName]:fieldText,
         }));
     }
-    const navigator = useNavigation<NavigationProp<screens>>();
+    let loginNow = () => {
+        login(userData);
+        if(user) {
+            navigator.navigate("bottomTab");
+        }
+    }
     return (
         <View style={styles.mainView}>
             <View style={styles.loginView}>
@@ -59,7 +67,7 @@ export default function LoginScreen() {
                         </TouchableOpacity>
                     </View>
                     <View style={{flexDirection:"row",justifyContent:"center"}}>
-                        <TouchableOpacity onPress={()=>navigator.navigate("bottomTab")} style={styles.loginBtn}>
+                        <TouchableOpacity onPress={loginNow} style={styles.loginBtn}>
                             <Text style={{textAlign:"center",color:"white"}}>Log In</Text>
                         </TouchableOpacity>
                     </View>

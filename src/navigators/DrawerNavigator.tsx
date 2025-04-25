@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useContext } from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import LaptopScreen from '../screens/DrawerScreens/LaptopScreen'
@@ -11,21 +11,30 @@ export default function DrawerNavigator() {
     return (
         <Drawer.Navigator initialRouteName='Laptop'>
             <Drawer.Screen name="Laptop" component={LaptopScreen} options={{headerRight: () => (
-            <Button
+            <TouchableOpacity
               onPress={logout}
-              title="Logout"
-              color="#000"
-            />
-          )
-        }} />
-            <Drawer.Screen name="Mobile" component={MobileScreen}options={{headerRight: () => (
-            <Button
+              style={styles.logoutBtn}
+            >
+              <Text style={{color:"white",padding:10,}}>Log Out</Text>
+            </TouchableOpacity>
+          )}}
+          />
+          <Drawer.Screen name="Mobile" component={MobileScreen}options={{headerRight: () => (
+            <TouchableOpacity
               onPress={logout}
-              title="Logout"
-              color="#000"
-            />) }} />
+              style={styles.logoutBtn}
+            >
+              <Text style={{color:"white",padding:10,}}>Log Out</Text>
+            </TouchableOpacity>
+          )}}
+          />
         </Drawer.Navigator>
     )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  logoutBtn: {
+    backgroundColor:"red",  
+    marginInline:20, 
+  }
+})

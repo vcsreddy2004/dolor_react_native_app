@@ -6,6 +6,7 @@ import LandingScreen from "./src/screens/StackScreens/LandingScreen";
 import LoginScreen from "./src/screens/StackScreens/LoginScreen";
 import RegisterScreen from "./src/screens/StackScreens/RegisterScreen";
 import BottomTabNavigator from "./src/navigators/BottomTabNavigator";
+import { StatusBar } from "react-native";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ let AppNavigator = () => {
   let Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
+      <StatusBar barStyle="dark-content" backgroundColor="white" />
       {user ? (
         <Stack.Navigator initialRouteName="bottomTab" screenOptions={{headerShown:false}}>
           <Stack.Screen name="bottomTab" component={BottomTabNavigator}></Stack.Screen>

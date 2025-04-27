@@ -9,26 +9,20 @@ export default function DrawerNavigator() {
     let {logout} = useContext(AuthContext);
     let Drawer = createDrawerNavigator()
     return (
-        <Drawer.Navigator initialRouteName='Laptop'>
-            <Drawer.Screen name="Laptop" component={LaptopScreen} options={{headerRight: () => (
-            <TouchableOpacity
-              onPress={logout}
-              style={styles.logoutBtn}
-            >
-              <Text style={{color:"white",padding:10,}}>Log Out</Text>
-            </TouchableOpacity>
-          )}}
-          />
-          <Drawer.Screen name="Mobile" component={MobileScreen}options={{headerRight: () => (
-            <TouchableOpacity
-              onPress={logout}
-              style={styles.logoutBtn}
-            >
-              <Text style={{color:"white",padding:10,}}>Log Out</Text>
-            </TouchableOpacity>
-          )}}
-          />
-        </Drawer.Navigator>
+      <Drawer.Navigator initialRouteName='Laptop' 
+        screenOptions={{
+        headerRight: ()=> (
+          <TouchableOpacity
+            onPress={logout}
+            style={styles.logoutBtn}
+          >
+            <Text style={{color:"white",padding:10,}}>Log Out</Text>
+          </TouchableOpacity>
+        )}}
+      >
+        <Drawer.Screen name="Laptop" component={LaptopScreen} />
+        <Drawer.Screen name="Mobile" component={MobileScreen} />
+      </Drawer.Navigator>
     )
 }
 
